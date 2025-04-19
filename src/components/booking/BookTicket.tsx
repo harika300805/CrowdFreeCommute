@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -7,6 +8,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { mockBusRoutes, mockBusSchedules, mockSeatLayout } from "@/data/mockData";
+import { updateAfterBooking } from "@/utils/ticketOperations";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Calendar, Clock, MapPin, Search } from "lucide-react";

@@ -11,19 +11,22 @@ interface BookingDetails {
 }
 
 export const updateAfterBooking = (booking: BookingDetails) => {
-  // Update seat availability
+  // Find the schedule for this route
   const scheduleIndex = mockBusSchedules.findIndex(
     schedule => schedule.routeId === booking.routeId
   );
 
-  if (scheduleIndex !== -1) {
-    mockBusSchedules[scheduleIndex] = {
-      ...mockBusSchedules[scheduleIndex],
-      availableSeats: mockBusSchedules[scheduleIndex].availableSeats - booking.selectedSeats.length
-    };
+  if (scheduleIndex === -1) {
+    throw new Error("Schedule not found");
   }
 
-  // Update seat layout
+  // Update seat availability in the schedule
+  mockBusSchedules[scheduleIndex] = {
+    ...mockBusSchedules[scheduleIndex],
+    availableSeats: mockBusSchedules[scheduleIndex].availableSeats - booking.selectedSeats.length
+  };
+
+  // Update seat layout to mark selected seats as booked
   booking.selectedSeats.forEach(seatId => {
     const seatIndex = mockSeatLayout.findIndex(seat => seat.id === seatId);
     if (seatIndex !== -1) {
@@ -48,6 +51,7 @@ export const updateAfterBooking = (booking: BookingDetails) => {
 
   return {
     updatedSchedule: mockBusSchedules[scheduleIndex],
+    updatedSeats: mockSeatLayout.filter(seat => booking.selectedSeats.includes(seat.id)),
     transaction
   };
 };
