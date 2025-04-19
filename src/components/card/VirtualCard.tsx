@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,6 +13,21 @@ export default function VirtualCard() {
   const { toast } = useToast();
   const [rechargeAmount, setRechargeAmount] = useState<number>(100);
   const [isRecharging, setIsRecharging] = useState(false);
+  const [recentTransactions, setRecentTransactions] = useState([]);
+
+  useEffect(() => {
+    if (!user) return;
+    
+    const interval = setInterval(() => {
+      const latestTransactions = mockTransactionHistory
+        .filter(txn => txn.userId === user.id)
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      
+      setRecentTransactions(latestTransactions);
+    }, 5000); // Refresh every 5 seconds
+    
+    return () => clearInterval(interval);
+  }, [user]);
 
   const handleRecharge = () => {
     if (rechargeAmount <= 0) {

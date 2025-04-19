@@ -101,70 +101,46 @@ export default function BookTicket() {
   };
 
   const handleBooking = () => {
-    if (selectedSeats.length === 0) {
-      toast({
-        variant: "destructive",
-        title: "No seats selected",
-        description: "Please select at least one seat",
-      });
-      return;
-    }
+    if (selectedSeats.length === 0 || !selectedRoute || !user) return;
     
-    if (!user) {
-      toast({
-        variant: "destructive",
-        title: "Authentication required",
-        description: "Please login to book tickets",
-      });
-      navigate("/login");
-      return;
-    }
+    setIsBooking(true);
     
     const route = mockBusRoutes.find(route => route.id === selectedRoute);
     const totalPrice = selectedSeats.length * (route?.fare || 0);
     
-    if (user.cardBalance < totalPrice) {
+    if (!route || user.cardBalance < totalPrice) {
       toast({
         variant: "destructive",
-        title: "Insufficient balance",
-        description: `Your card balance is ₹${user.cardBalance}, but the total cost is ₹${totalPrice}`,
+        title: "Booking failed",
+        description: "Insufficient balance or invalid route",
       });
+      setIsBooking(false);
       return;
     }
     
-    setIsBooking(true);
+    // Update all related data
+    const booking = {
+      userId: user.id,
+      routeId: selectedRoute,
+      selectedSeats,
+      fare: totalPrice,
+      busNumber: selectedSchedule?.busNumber || '',
+      routeName: route.name
+    };
     
-    // Simulate API call
-    setTimeout(() => {
-      // Update user's card balance
-      const newBalance = user.cardBalance - totalPrice;
-      updateCardBalance(newBalance);
-      
-      // Mark seats as booked
-      setSeats(prev => prev.map(seat => {
-        if (selectedSeats.includes(seat.id)) {
-          return { ...seat, isBooked: true };
-        }
-        return seat;
-      }));
-      
-      // Update available seats in schedule
-      if (selectedSchedule) {
-        const updatedSchedule = {
-          ...selectedSchedule,
-          availableSeats: selectedSchedule.availableSeats - selectedSeats.length
-        };
-        setSelectedSchedule(updatedSchedule);
-      }
-      
-      toast({
-        title: "Booking successful",
-        description: `You have successfully booked ${selectedSeats.length} seat(s) for ₹${totalPrice}`,
-      });
-      
-      setStep('confirmation');
-      setIsBooking(false);
-    }, 1500);
+    const { transaction } = updateAfterBooking(booking);
+    
+    // Update user's card balance
+    const newBalance = user.cardBalance - totalPrice;
+    updateCardBalance(newBalance);
+    
+    toast({
+      title: "Booking successful",
+      description: `Tickets booked for ${selectedSeats.length} seats. Transaction ID: ${transaction.id}`,
+    });
+    
+    setStep('confirmation');
+    setIsBooking(false);
   };
 
   return (

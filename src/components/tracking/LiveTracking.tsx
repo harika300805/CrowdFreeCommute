@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -7,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { mockBusRoutes, mockBusSchedules } from "@/data/mockData";
 import { Map, MapPin, Search } from "lucide-react";
+import { simulateBusMovement } from "@/utils/ticketOperations";
 
 export default function LiveTracking() {
   const [selectedRoute, setSelectedRoute] = useState<string>("");
@@ -47,19 +47,28 @@ export default function LiveTracking() {
     
     setIsLoading(true);
     
-    // Simulate API call to get updated location
-    setTimeout(() => {
-      // Randomly adjust the location slightly for simulation
-      const jitter = 0.01;
-      const newLat = selectedBus.currentLocation.lat + (Math.random() - 0.5) * jitter;
-      const newLng = selectedBus.currentLocation.lng + (Math.random() - 0.5) * jitter;
-      
-      setBusLocation({ lat: newLat, lng: newLng });
-      setIsLoading(false);
-    }, 1000);
+    // Simulate real-time location update
+    const update = simulateBusMovement(selectedBus.id);
+    
+    if (update) {
+      setBusLocation(update.location);
+      setSelectedBus(prev => ({
+        ...prev!,
+        currentLocation: update.location,
+        nextStop: update.nextStop
+      }));
+    }
+    
+    setIsLoading(false);
   };
 
-  // Simulate map display with a placeholder
+  useEffect(() => {
+    if (!selectedBus) return;
+    
+    const interval = setInterval(refreshLocation, 30000);
+    return () => clearInterval(interval);
+  }, [selectedBus]);
+
   const renderMapPlaceholder = () => {
     if (!busLocation) return null;
     
