@@ -1,4 +1,3 @@
-
 // Mock User Data
 export const mockUserData = [
   {
@@ -19,57 +18,57 @@ export const mockUserData = [
 export const mockBusRoutes = [
   {
     id: 'route-1',
-    name: 'Delhi - Gurugram Express',
-    origin: 'Delhi ISBT',
-    destination: 'Gurugram Bus Terminal',
-    fare: 50,
-    distance: '32 km',
-    duration: '45 min'
-  },
-  {
-    id: 'route-2',
-    name: 'Mumbai - Pune Shuttle',
-    origin: 'Mumbai Central',
-    destination: 'Pune Station',
-    fare: 120,
-    distance: '150 km',
-    duration: '3 hrs'
-  },
-  {
-    id: 'route-3',
-    name: 'Bangalore - Mysore Traveller',
+    name: 'Bangalore - Mysore Express',
     origin: 'Majestic Bus Stand',
     destination: 'Mysore Bus Stand',
-    fare: 100,
+    fare: 150,
     distance: '145 km',
     duration: '3.5 hrs'
   },
   {
-    id: 'route-4',
+    id: 'route-2',
     name: 'Chennai - Pondicherry Coastal',
     origin: 'Chennai Central',
     destination: 'Pondicherry Bus Terminal',
-    fare: 85,
+    fare: 120,
     distance: '170 km',
     duration: '3 hrs'
   },
   {
-    id: 'route-5',
-    name: 'Hyderabad - Warangal Express',
+    id: 'route-3',
+    name: 'Hyderabad - Tirupati Temple',
     origin: 'Hyderabad Central Bus Station',
-    destination: 'Warangal Bus Stand',
-    fare: 90,
-    distance: '145 km',
-    duration: '2.5 hrs'
+    destination: 'Tirupati Bus Stand',
+    fare: 450,
+    distance: '600 km',
+    duration: '10 hrs'
+  },
+  {
+    id: 'route-4',
+    name: 'Kochi - Munnar Hills',
+    origin: 'Kochi Bus Terminal',
+    destination: 'Munnar Bus Stand',
+    fare: 180,
+    distance: '130 km',
+    duration: '4 hrs'
+  },
+  {
+    id: 'route-5',
+    name: 'Coimbatore - Madurai Express',
+    origin: 'Coimbatore Bus Stand',
+    destination: 'Madurai Periyar',
+    fare: 200,
+    distance: '220 km',
+    duration: '5 hrs'
   },
   {
     id: 'route-6',
-    name: 'Kolkata - Siliguri Hill Connect',
-    origin: 'Kolkata Esplanade',
-    destination: 'Siliguri Bus Terminal',
-    fare: 180,
-    distance: '570 km',
-    duration: '12 hrs'
+    name: 'Mangalore - Udupi Coastal',
+    origin: 'Mangalore Central',
+    destination: 'Udupi Bus Stand',
+    fare: 80,
+    distance: '60 km',
+    duration: '1.5 hrs'
   }
 ];
 
@@ -78,57 +77,57 @@ export const mockBusSchedules = [
   {
     id: 'schedule-1',
     routeId: 'route-1',
-    busNumber: 'DL-1234',
+    busNumber: 'KA-01-F-1234',
     departureTime: '07:00',
-    arrivalTime: '07:45',
+    arrivalTime: '10:30',
     availableSeats: 32,
-    totalSeats: 40,
-    currentLocation: { lat: 28.6139, lng: 77.2090 }, // Delhi
-    nextStop: 'Dhaula Kuan'
-  },
-  {
-    id: 'schedule-2',
-    routeId: 'route-1',
-    busNumber: 'DL-5678',
-    departureTime: '08:30',
-    arrivalTime: '09:15',
-    availableSeats: 15,
-    totalSeats: 40,
-    currentLocation: { lat: 28.5891, lng: 77.0762 }, // Near Gurugram
-    nextStop: 'Cyber City'
-  },
-  {
-    id: 'schedule-3',
-    routeId: 'route-2',
-    busNumber: 'MH-1234',
-    departureTime: '06:00',
-    arrivalTime: '09:00',
-    availableSeats: 22,
-    totalSeats: 45,
-    currentLocation: { lat: 19.0760, lng: 72.8777 }, // Mumbai
-    nextStop: 'Lonavala'
-  },
-  {
-    id: 'schedule-4',
-    routeId: 'route-3',
-    busNumber: 'KA-1234',
-    departureTime: '09:00',
-    arrivalTime: '12:30',
-    availableSeats: 18,
     totalSeats: 40,
     currentLocation: { lat: 12.9716, lng: 77.5946 }, // Bangalore
     nextStop: 'Mandya'
   },
   {
-    id: 'schedule-5',
-    routeId: 'route-4',
-    busNumber: 'TN-1234',
-    departureTime: '10:00',
-    arrivalTime: '13:00',
+    id: 'schedule-2',
+    routeId: 'route-2',
+    busNumber: 'TN-01-G-5678',
+    departureTime: '08:30',
+    arrivalTime: '11:30',
     availableSeats: 25,
     totalSeats: 40,
     currentLocation: { lat: 13.0827, lng: 80.2707 }, // Chennai
     nextStop: 'Mahabalipuram'
+  },
+  {
+    id: 'schedule-3',
+    routeId: 'route-3',
+    busNumber: 'AP-01-H-9012',
+    departureTime: '20:00',
+    arrivalTime: '06:00',
+    availableSeats: 35,
+    totalSeats: 45,
+    currentLocation: { lat: 17.3850, lng: 78.4867 }, // Hyderabad
+    nextStop: 'Kurnool'
+  },
+  {
+    id: 'schedule-4',
+    routeId: 'route-4',
+    busNumber: 'KL-01-J-3456',
+    departureTime: '09:00',
+    arrivalTime: '13:00',
+    availableSeats: 28,
+    totalSeats: 40,
+    currentLocation: { lat: 9.9312, lng: 76.2673 }, // Kochi
+    nextStop: 'Adimali'
+  },
+  {
+    id: 'schedule-5',
+    routeId: 'route-5',
+    busNumber: 'TN-01-K-7890',
+    departureTime: '10:00',
+    arrivalTime: '15:00',
+    availableSeats: 30,
+    totalSeats: 40,
+    currentLocation: { lat: 11.0168, lng: 76.9558 }, // Coimbatore
+    nextStop: 'Dindigul'
   }
 ];
 
@@ -176,38 +175,54 @@ export const mockSeatLayout = [
   { id: '10D', isBooked: true, price: 50, type: 'window' },
 ];
 
-// Mock Transaction History
+// Mock Transaction History with more types of transactions
 export const mockTransactionHistory = [
   {
     id: 'txn-1',
     userId: 'user-1',
     type: 'recharge',
-    amount: 200,
-    date: '2023-04-15T10:30:00Z',
+    amount: 500,
+    date: '2024-04-15T10:30:00Z',
     description: 'Card recharge via UPI'
   },
   {
     id: 'txn-2',
     userId: 'user-1',
     type: 'ticket',
-    amount: -50,
-    date: '2023-04-16T08:15:00Z',
-    description: 'Ticket for Delhi - Gurugram Express'
+    amount: -150,
+    date: '2024-04-16T08:15:00Z',
+    description: 'Ticket for Bangalore - Mysore Express'
   },
   {
     id: 'txn-3',
     userId: 'user-1',
     type: 'recharge',
-    amount: 500,
-    date: '2023-04-20T14:45:00Z',
+    amount: 1000,
+    date: '2024-04-20T14:45:00Z',
     description: 'Card recharge via Credit Card'
   },
   {
     id: 'txn-4',
     userId: 'user-1',
     type: 'ticket',
-    amount: -100,
-    date: '2023-04-22T07:30:00Z',
-    description: 'Ticket for Bangalore - Mysore Traveller'
+    amount: -180,
+    date: '2024-04-22T07:30:00Z',
+    description: 'Ticket for Kochi - Munnar Hills'
+  },
+  {
+    id: 'txn-5',
+    userId: 'user-1',
+    type: 'refund',
+    amount: 180,
+    date: '2024-04-22T12:30:00Z',
+    description: 'Refund for cancelled Kochi - Munnar ticket'
+  },
+  {
+    id: 'txn-6',
+    userId: 'user-1',
+    type: 'ticket',
+    amount: -120,
+    date: '2024-04-23T09:15:00Z',
+    description: 'Ticket for Chennai - Pondicherry Coastal'
   }
 ];
